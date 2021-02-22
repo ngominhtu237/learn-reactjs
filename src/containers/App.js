@@ -19,7 +19,8 @@ class App extends Component {
       { id: '3', name: 'Stephanie', age: 26 }
     ],
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -58,7 +59,12 @@ class App extends Component {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({ persons: persons })
+    this.setState((prevState, props) => {
+      return { 
+        persons: persons,
+        changeCounter: this.state.changeCounter + 1
+      }
+    })
   }
 
   togglePersonsHandler = () => {
